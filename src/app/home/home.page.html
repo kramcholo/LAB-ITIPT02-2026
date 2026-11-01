@@ -1,0 +1,58 @@
+<ion-header [translucent]="true" class="custom-header">
+  <ion-toolbar>
+    <ion-title>
+      Student Directory Management
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Student Directory</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-list>
+  @for (student of students; track student.id) {
+  <ion-item>
+    <ion-label>
+      <h2>{{ student.name }}</h2>
+      <p>{{student.gender}}</p> 
+      <p>{{student.course}}</p>
+      <p>Year {{student.year}}</p>
+      <p [textContent]="'Section: ' + student.section"> </p>
+  @if (student.average >= 85) {
+    <p class="Passed">Passed</p>
+  } @else {
+    <p class="Failed">Failed</p>
+  }
+    </ion-label>
+    <ion-button (click)="showStudentDetailsModal(student)">View Details</ion-button>
+  </ion-item>
+  }
+</ion-list>
+
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Student Details</ion-title>
+        <ion-buttons slot="end">  
+        <ion-button class="close-button" (click)="closeModal()"> Close </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <h2>{{ selectedStudent?.name }}</h2>
+      <p>Gender: {{ selectedStudent?.gender }}</p>
+      <p>Course: {{ selectedStudent?.course }}</p>
+      <p>Year: {{ selectedStudent?.year }}</p>
+      <p>Average: {{ selectedStudent?.average }}</p>
+    </ion-content>"
+  </ng-template>
+</ion-modal>
+ 
+</ion-content>
+
+
